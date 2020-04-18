@@ -2,17 +2,17 @@
 This template is prepared and tested in Linux environment.
 
 ## Feature Support
-[x] Serial Flashing
-[ ] DFU Flash
-[ ] Debugging
+ - [x] Serial Flashing
+ - [ ] DFU Flash
+ - [ ] Debugging
 
 ## Packages Required
-1. [Eclipse with CDT](https://www.eclipse.org/cdt/downloads.php)
+1. Eclipse with CDT (https://www.eclipse.org/cdt/downloads.php)
 2. Make
 3. Java Runtime Environment (JRE)
 4. GD32V Toolchain
-    a. [Precompiled](https://www.nucleisys.com/download.php)
-    b. [Source](https://github.com/riscv-mcu/riscv-gnu-toolchain?utm_source=platformio&utm_medium=docs)
+    * Precompiled (https://www.nucleisys.com/download.php)
+    * Source Code (https://github.com/riscv-mcu/riscv-gnu-toolchain?utm_source=platformio&utm_medium=docs)
 
 ## Installation
 ### 1. Make and JRE
@@ -25,7 +25,7 @@ For Arch environment
     $ sudo pacman -S make jre-openjdk
 
 ### 2. Toolchain
-#### a. Using Terminal
+#### Using Terminal
     $ cd ~/
 **Get toolchain for Ubuntu/Debian/Arch**
 
@@ -38,11 +38,11 @@ For Arch environment
     $ tar -xjvf rv_linux_bare_*.tar.bz2
     $ mv rv_linux_bare_*/ toolchain_gd32v/
 **NOTE:** "toolchain_gd32v" and home directory is the toolchain name and path used in eclipse project setting. If you want use a differnt folder name or path then eclipse project setting will also need some update.
-#### b. Using GUI
-1. Download the Toolchain from Nucleisys [website](https://www.nucleisys.com/download.php).
-2. Extract the downloaded file and make sure that extracted folder contains a bin folder in its root.
-    :x: folder/folder/bin ...
-    :white_check_mark: folder/bin ...
+#### Using GUI
+1. Download the Toolchain from Nucleisys website (https://www.nucleisys.com/download.php).
+2. Extract the downloaded file and make sure that extracted folder contains a "bin" folder in its root.
+     * :x: folder/folder/bin ...
+     * :white_check_mark: folder/bin ...
 3. Rename the extracted root folder "toolchain_gd32v"
 4. Copy it to home directory i.e /home/<username>/
 
@@ -56,23 +56,23 @@ For other distributions use below command in terminal and restart the system or 
     $ sudo usermod -a -G dialout $USER
 
 ## Compile and Flash
-1. Clone the repository 
+**Clone the repository**
 
     $ git clone https://github.com/piratepanda47/longan_nano_template.git
-2. Open Eclipse and Import or Open this template project
-4. Build project to compile and generate elf, hex and bin files
-    a. Files will be generted in the respective active build configuration directory i.e. Debug and Release
-    b. Release doesn't have debugging flag in compiler.
-5. This template currenlty support serial flashing only.
-    a. Place the device in booloader mode by pressing (BOOT0) button then toggling (RESET) button
-    b. Expand Build Targets in Project hierarchy and double click flash
-    c. it should start flashing logs will start displaying in console window of eclipse
+1. Open Eclipse and Import or Open this template project
+2. Build project to compile and generate elf, hex and bin files
+    1. Files will be generted in the respective active build configuration directory i.e. Debug and Release
+    2. Release doesn't have debugging flag in compiler.
+3. This template currenlty support serial flashing only.
+    1. Place the device in booloader mode by pressing (BOOT0) button then toggling (RESET) button
+    2. Expand Build Targets in Project hierarchy and double click flash
+    3. it should start flashing logs will start displaying in console window of eclipse
 
 ### Changing Compiler Path
 1. Open properties of project.
 2. C/C++ Build --> Environment --> compiler_toolchain
-    a. edit its value to bin location of the compiler path.
+    1. edit its value and add the path of toolchain's bin folder.
 
 ## Thanks To
-:+1: **rogerclarkmelbourne (https://github.com/rogerclarkmelbourne/arduino_stm32)**
-:+1: **platformio (https://platformio.org/)**
+- :+1: **rogerclarkmelbourne (https://github.com/rogerclarkmelbourne/arduino_stm32)**
+- :+1: **platformio (https://platformio.org/)**
