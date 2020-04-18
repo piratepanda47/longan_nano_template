@@ -1,8 +1,6 @@
-
 /*!
-    \file  main.c
-    \brief running led
-
+    \file  systick.h
+    \brief the header file of systick
     \version 2019-6-5, V1.0.0, firmware for GD32VF103
 */
 
@@ -30,50 +28,11 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
-#include "gd32vf103.h"
-#include "systick.h"
-#include <stdio.h>
+#ifndef SYS_TICK_H
+#define SYS_TICK_H
 
-/* BUILTIN LED OF LONGAN BOARDS IS PIN PC13 */
-#define LED_PIN GPIO_PIN_13
-#define LED_GPIO_PORT GPIOC
-#define LED_GPIO_CLK RCU_GPIOC
+#include <stdint.h>
 
-void longan_led_init()
-{
-    /* enable the led clock */
-    rcu_periph_clock_enable(LED_GPIO_CLK);
-    /* configure led GPIO port */
-    gpio_init(LED_GPIO_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, LED_PIN);
+void delay_1ms(uint32_t count);
 
-    GPIO_BC(LED_GPIO_PORT) = LED_PIN;
-}
-
-void longan_led_off()
-{
-    GPIO_BOP(LED_GPIO_PORT) = LED_PIN;
-}
-
-void longan_led_on()
-{
-    GPIO_BC(LED_GPIO_PORT) = LED_PIN;
-}
-/*!
-    \brief      main function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-int main(void)
-{
-    longan_led_init();
-
-    while(1){
-        /* turn on built-in led */
-        longan_led_on();
-        delay_1ms(1000);
-        /* turn off built-in led */
-        longan_led_off();
-        delay_1ms(1000);
-    }
-}
+#endif /* SYS_TICK_H */

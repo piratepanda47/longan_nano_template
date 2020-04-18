@@ -1,8 +1,6 @@
-
 /*!
-    \file  main.c
-    \brief running led
-
+    \file  systick.c
+    \brief the systick configuration file
     \version 2019-6-5, V1.0.0, firmware for GD32VF103
 */
 
@@ -32,48 +30,24 @@ OF SUCH DAMAGE.
 
 #include "gd32vf103.h"
 #include "systick.h"
-#include <stdio.h>
 
-/* BUILTIN LED OF LONGAN BOARDS IS PIN PC13 */
-#define LED_PIN GPIO_PIN_13
-#define LED_GPIO_PORT GPIOC
-#define LED_GPIO_CLK RCU_GPIOC
-
-void longan_led_init()
-{
-    /* enable the led clock */
-    rcu_periph_clock_enable(LED_GPIO_CLK);
-    /* configure led GPIO port */
-    gpio_init(LED_GPIO_PORT, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ, LED_PIN);
-
-    GPIO_BC(LED_GPIO_PORT) = LED_PIN;
-}
-
-void longan_led_off()
-{
-    GPIO_BOP(LED_GPIO_PORT) = LED_PIN;
-}
-
-void longan_led_on()
-{
-    GPIO_BC(LED_GPIO_PORT) = LED_PIN;
-}
 /*!
-    \brief      main function
-    \param[in]  none
+    \brief      delay a time in milliseconds
+    \param[in]  count: count in milliseconds
     \param[out] none
     \retval     none
 */
-int main(void)
+void delay_1ms(uint32_t count)
 {
-    longan_led_init();
+    uint64_t start_mtime, delta_mtime;
 
-    while(1){
-        /* turn on built-in led */
-        longan_led_on();
-        delay_1ms(1000);
-        /* turn off built-in led */
-        longan_led_off();
-        delay_1ms(1000);
-    }
+    // Don't start measuruing until we see an mtime tick
+    uint64_t tmp = get_timer_value();
+    do {
+    start_mtime = get_timer_value();
+    } while (start_mtime == tmp);
+
+    do {
+    delta_mtime = get_timer_value() - start_mtime;
+    }while(delta_mtime <(SystemCoreClock/4000.0 *count ));
 }
