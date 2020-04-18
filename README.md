@@ -66,7 +66,7 @@ For other distributions use below command in terminal and restart the system or 
 3. This template currenlty support serial flashing only.
     1. Place the device in booloader mode by pressing (BOOT0) button then toggling (RESET) button
     2. Expand Build Targets in Project hierarchy and double click flash
-    3. it should start flashing logs will start displaying in console window of eclipse
+    3. it should start flashing and logs shall start displaying in console window of eclipse
 
 ### Changing Compiler Path
 1. Open properties of project.
